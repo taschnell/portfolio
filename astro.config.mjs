@@ -58,7 +58,7 @@ function rehypeBasePaths() {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://taschnell.github.io', // override via ASTRO_SITE env var or edit directly
+  site: 'https://teoschnell.com', // override via ASTRO_SITE env var or edit directly
   base: 'portfolio', // override via ASTRO_BASE env var or set '/repo-name' for project pages
   output: 'static',
   trailingSlash: 'always',
