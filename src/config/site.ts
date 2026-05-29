@@ -119,9 +119,9 @@ export const site = {
      * `href` values are relative to the site root (base is prepended automatically).
      */
     items: [
-      { label: 'about', href: '/' },
-      { label: 'projects', href: '/projects/' },
-      { label: 'cv', href: '/cv/' },
+      { label: 'About', href: '/' },
+      { label: 'Projects', href: '/projects/' },
+      { label: 'CV', href: '/cv/' },
     ] as NavItem[],
   },
 
@@ -143,7 +143,7 @@ export const site = {
      * 'normal'  — sits at the natural bottom of page content (only visible when scrolled down)
      * 'hidden'  — footer is not rendered at all
      */
-    position: 'sticky' as 'sticky' | 'normal' | 'hidden',
+    position: 'hidden' as 'sticky' | 'normal' | 'hidden',
   },
 
   // ─── CV page ───────────────────────────────────────────────────────────────
@@ -398,7 +398,8 @@ export const site = {
   pages: {
     projects: {
       /** Description shown below the "projects" heading on the projects page. */
-      description: 'A curated portfolio of aerospace, controls, and robotics work including UCSC NSF REU research and Cabrillo Robotics systems.',
+      description:
+        'A curated portfolio of aerospace, controls, and robotics work including UCSC NSF REU research and Cabrillo Robotics systems.',
     },
     teaching: {
       /** Description shown below the "teaching" heading on the teaching page. */

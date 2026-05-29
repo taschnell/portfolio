@@ -2,7 +2,7 @@
 title: CNC Foam Cutter for RC Aircraft
 description: Designed and built a CNC foam cutter for Cabrillo Robotics to fabricate wing cores and structural parts for RC aircraft.
 importance: 15
-category: Engineering
+category: Current projects
 ---
 
 Designed and built a CNC foam cutter for Cabrillo Robotics, enabling rapid fabrication of wing cores and aerodynamic structures for RC aircraft.

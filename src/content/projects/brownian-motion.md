@@ -3,7 +3,7 @@ title: RC Plane Physics Model
 description: Developed a Python model of RC aircraft aerodynamics that matched real-world data within 3% error.
 github: taschnell/RcPlaneSim
 importance: 40
-category: Engineering
+category: Past projects
 ---
 
 Built a physics model for RC aircraft performance, predicting thrust, drag, and lift with high accuracy.

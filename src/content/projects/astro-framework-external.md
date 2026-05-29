@@ -3,7 +3,7 @@ title: 3D-Printed UAV with Flight Stabilization
 description: Developed a custom 3D-printed UAV and a microcontroller-based flight stabilization system.
 github: CabrilloRoboticsClub/stm32-drone
 importance: 20
-category: Engineering
+category: Past projects
 ---
 
 Developed and tested a custom STM32-based flight controller for a 3D-printed UAV, incorporating sensor fusion and PID-stabilization algorithms.

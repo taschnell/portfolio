@@ -80,17 +80,20 @@ const fetchedUsers = await Promise.all(
 
 const githubUsers = fetchedUsers.filter(Boolean) as GitHubUser[];
 
-const fallbackUsers = users.map((username) => ({
-  login: username,
-  name: null,
-  html_url: `https://github.com/${username}`,
-  avatar_url: `https://github.com/${username}.png`,
-  bio: null,
-  location: null,
-  public_repos: 0,
-  followers: 0,
-  following: 0,
-} as GitHubUser));
+const fallbackUsers = users.map(
+  (username) =>
+    ({
+      login: username,
+      name: null,
+      html_url: `https://github.com/${username}`,
+      avatar_url: `https://github.com/${username}.png`,
+      bio: null,
+      location: null,
+      public_repos: 0,
+      followers: 0,
+      following: 0,
+    }) as GitHubUser,
+);
 
 const fetchedRepos = await Promise.all(
   repos.map(async (repo) => {
@@ -111,15 +114,18 @@ const fetchedRepos = await Promise.all(
 );
 
 const githubRepos = fetchedRepos.filter(Boolean) as GitHubRepo[];
-const fallbackRepos = repos.map((repo) => ({
-  full_name: repo,
-  html_url: `https://github.com/${repo}`,
-  description: null,
-  stargazers_count: 0,
-  forks_count: 0,
-  language: null,
-  updated_at: '',
-} as GitHubRepo));
+const fallbackRepos = repos.map(
+  (repo) =>
+    ({
+      full_name: repo,
+      html_url: `https://github.com/${repo}`,
+      description: null,
+      stargazers_count: 0,
+      forks_count: 0,
+      language: null,
+      updated_at: '',
+    }) as GitHubRepo,
+);
 ---
 
 <Page title="Repositories" description={`GitHub repositories`}>
@@ -139,8 +145,19 @@ const fallbackRepos = repos.map((repo) => ({
               <div class="repo-grid">
                 {githubUsers.map((user) => (
                   <div class="repo-card repo-card--user">
-                    <a href={user.html_url} target="_blank" rel="noopener noreferrer" class="repo-card-link">
-                      <img src={user.avatar_url} alt={`Avatar of ${user.login}`} loading="lazy" width="120" height="120" />
+                    <a
+                      href={user.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="repo-card-link"
+                    >
+                      <img
+                        src={user.avatar_url}
+                        alt={`Avatar of ${user.login}`}
+                        loading="lazy"
+                        width="120"
+                        height="120"
+                      />
                       <div class="repo-card-body">
                         <h3 class="repo-card-title">{user.name ?? user.login}</h3>
                         <p class="repo-card-description">{user.bio ?? 'GitHub profile'}</p>
@@ -159,8 +176,19 @@ const fallbackRepos = repos.map((repo) => ({
                 <div class="repo-grid">
                   {fallbackUsers.map((user) => (
                     <div class="repo-card repo-card--user">
-                      <a href={user.html_url} target="_blank" rel="noopener noreferrer" class="repo-card-link">
-                        <img src={user.avatar_url} alt={`Avatar of ${user.login}`} loading="lazy" width="120" height="120" />
+                      <a
+                        href={user.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="repo-card-link"
+                      >
+                        <img
+                          src={user.avatar_url}
+                          alt={`Avatar of ${user.login}`}
+                          loading="lazy"
+                          width="120"
+                          height="120"
+                        />
                         <div class="repo-card-body">
                           <h3 class="repo-card-title">{user.login}</h3>
                           <p class="repo-card-description">GitHub profile</p>
@@ -173,13 +201,14 @@ const fallbackRepos = repos.map((repo) => ({
                   ))}
                 </div>
                 <p class="repo-warning">
-                  GitHub API data was unavailable at build time. Showing profile links instead.
-                  Add a <code>GITHUB_TOKEN</code> environment variable to enable full metadata.
+                  GitHub API data was unavailable at build time. Showing profile links instead. Add
+                  a <code>GITHUB_TOKEN</code> environment variable to enable full metadata.
                 </p>
               </>
             )}
           </>
-        )}
+        )
+      }
 
       {
         site.repositories.githubRepos && repos.length > 0 && (
@@ -190,7 +219,12 @@ const fallbackRepos = repos.map((repo) => ({
               <div class="repo-grid">
                 {githubRepos.map((repo) => (
                   <div class="repo-card">
-                    <a href={repo.html_url} target="_blank" rel="noopener noreferrer" class="repo-card-link">
+                    <a
+                      href={repo.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="repo-card-link"
+                    >
                       <div class="repo-card-body">
                         <h3 class="repo-card-title">{repo.full_name}</h3>
                         <p class="repo-card-description">{truncate(repo.description)}</p>
@@ -209,7 +243,12 @@ const fallbackRepos = repos.map((repo) => ({
                 <div class="repo-grid">
                   {fallbackRepos.map((repo) => (
                     <div class="repo-card">
-                      <a href={repo.html_url} target="_blank" rel="noopener noreferrer" class="repo-card-link">
+                      <a
+                        href={repo.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="repo-card-link"
+                      >
                         <div class="repo-card-body">
                           <h3 class="repo-card-title">{repo.full_name}</h3>
                           <p class="repo-card-description">Repository link</p>
@@ -228,7 +267,8 @@ const fallbackRepos = repos.map((repo) => ({
               </>
             )}
           </>
-        )}
+        )
+      }
     </article>
   </div>
 </Page>
@@ -271,11 +311,13 @@ const fallbackRepos = repos.map((repo) => ({
     border-radius: 12px;
     background: var(--global-card-bg-color);
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
   }
   .repo-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.05);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.05);
   }
   .repo-card--user {
     display: flex;
