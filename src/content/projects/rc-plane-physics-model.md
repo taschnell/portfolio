@@ -54,7 +54,7 @@ dt = 0.01 s
 </div>
 
 <div style="margin-top:2rem;">
-  <img src="/assets/img/RcPlanePvT at 200W Simulated and Actual Data.png" alt="RC plane simulated vs actual 200W graph" style="width:100%; height:auto; display:block; border-radius:0.75rem;" />
+  <img src="/assets/img/RcPlanePvT%20at%20200W%20Simulated%20and%20Actual%20Data.png" alt="RC plane simulated vs actual 200W graph" style="width:100%; height:auto; display:block; border-radius:0.75rem;" />
 </div>
 
 <div style="margin-top:1rem; width:100%;">
