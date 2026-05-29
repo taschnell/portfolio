@@ -1,11 +1,12 @@
 ---
-title: as-folio
-description: A modern Astro template for academics — 100% al-folio feature parity with Astro 6, Tailwind v4, and TypeScript.
-importance: 10
-category: open source
-github: dadangnh/as-folio
-github_stars: dadangnh/as-folio
-url: https://github.com/dadangnh/as-folio
+title: CNC Foam Cutter for RC Aircraft
+description: Designed and built a CNC foam cutter for Cabrillo Robotics to fabricate wing cores and structural parts for RC aircraft.
+importance: 15
+category: Engineering
 ---
 
-as-folio is a free, open-source academic portfolio template powered by Astro. It brings all the features of the popular al-folio Jekyll theme to the modern Astro ecosystem.
+Designed and built a CNC foam cutter for Cabrillo Robotics, enabling rapid fabrication of wing cores and aerodynamic structures for RC aircraft.
+
+- Built the cutter mechanics, motion control, and foam cutting toolchain.
+- Developed workflows for wing profile generation, nesting, and precise contour cutting.
+- Used the CNC system to produce lightweight, high-quality RC airframe components.

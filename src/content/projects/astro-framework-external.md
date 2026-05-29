@@ -1,25 +1,13 @@
 ---
-title: 'Astro Framework'
-description: 'An external project page — visiting this card redirects to the official Astro website. Demonstrates the redirect field.'
-importance: 50
-category: external
-redirect: https://astro.build
-img: /assets/img/2.jpg
-img_alt: Astro framework logo and rocket illustration
+title: 3D-Printed UAV with Flight Stabilization
+description: Developed a custom 3D-printed UAV and a microcontroller-based flight stabilization system.
+github: CabrilloRoboticsClub/stm32-drone
+importance: 20
+category: Engineering
 ---
 
-This project page demonstrates the `redirect` field. Clicking the card or visiting
-`/projects/astro-framework-external/` redirects immediately to `https://astro.build`.
+Developed and tested a custom STM32-based flight controller for a 3D-printed UAV, incorporating sensor fusion and PID-stabilization algorithms.
 
-Use `redirect` for projects that are hosted on external platforms (npm, PyPI, a dedicated
-website) where the project detail page would just duplicate content that already exists
-at the canonical URL.
-
-```yaml
----
-title: My External Project
-redirect: https://example.com/my-project
----
-```
-
-No content body is needed. The redirect happens at the Astro routing level.
+- Designed a microcontroller-based flight stabilizer using integrated IMU sensors.
+- Implemented PID-driven stabilization algorithms for stable flight.
+- Built and validated the airframe using 3D printing and flight test iterations.

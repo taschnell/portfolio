@@ -122,12 +122,6 @@ export async function GET(_ctx: APIContext): Promise<Response> {
       changefreq: 'monthly',
       priority: 0.5,
     },
-    {
-      url: loc('/repositories/'),
-      lastmod: gitLastmod('src/pages/repositories.astro'),
-      changefreq: 'monthly',
-      priority: 0.5,
-    },
   ];
 
   const postUrls: UrlEntry[] = posts

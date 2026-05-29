@@ -1,13 +1,12 @@
 github_users:
-  - torvalds
-  - dadangnh
+  - taschnell
 
 github_repos:
-  - dadangnh/as-folio
-  - torvalds/linux
-  - git/git
-  - python/cpython
-  - astro/astro
-  - tailwindlabs/tailwindcss
+  - taschnell/portfolio
+  - taschnell/as-folio
+  - taschnell/RcPlaneSim
+  - taschnell/piplane
+  - taschnell/piplane-sim
+  - taschnell/OpenVTx
 
 repo_description_lines_max: 2

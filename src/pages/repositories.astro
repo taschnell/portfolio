@@ -13,7 +13,113 @@ const reposData = yaml.load(reposRaw) as {
 
 const users: string[] = reposData.github_users ?? [];
 const repos: string[] = reposData.github_repos ?? [];
-const maxLines = reposData.repo_description_lines_max ?? 2;
+const descriptionLines = reposData.repo_description_lines_max ?? 2;
+const maxDescriptionLength = descriptionLines * 80;
+const githubToken = import.meta.env.GITHUB_TOKEN as string | undefined;
+const githubHeaders = {
+  Accept: 'application/vnd.github.v3+json',
+  ...(githubToken ? { Authorization: `token ${githubToken}` } : {}),
+};
+
+async function fetchJson(url: string) {
+  try {
+    const response = await fetch(url, { headers: githubHeaders });
+    if (!response.ok) return null;
+    return await response.json();
+  } catch {
+    return null;
+  }
+}
+
+function truncate(text: string | null | undefined) {
+  if (!text) return '';
+  return text.length > maxDescriptionLength
+    ? `${text.slice(0, maxDescriptionLength).trim()}...`
+    : text;
+}
+
+type GitHubUser = {
+  login: string;
+  name: string | null;
+  html_url: string;
+  avatar_url: string;
+  bio: string | null;
+  location: string | null;
+  public_repos: number;
+  followers: number;
+  following: number;
+};
+
+type GitHubRepo = {
+  full_name: string;
+  html_url: string;
+  description: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  language: string | null;
+  updated_at: string;
+};
+
+const fetchedUsers = await Promise.all(
+  users.map(async (username) => {
+    const data = await fetchJson(`https://api.github.com/users/${username}`);
+    if (!data) return null;
+    return {
+      login: data.login,
+      name: data.name,
+      html_url: data.html_url,
+      avatar_url: data.avatar_url,
+      bio: data.bio,
+      location: data.location,
+      public_repos: data.public_repos,
+      followers: data.followers,
+      following: data.following,
+    } as GitHubUser;
+  }),
+);
+
+const githubUsers = fetchedUsers.filter(Boolean) as GitHubUser[];
+
+const fallbackUsers = users.map((username) => ({
+  login: username,
+  name: null,
+  html_url: `https://github.com/${username}`,
+  avatar_url: `https://github.com/${username}.png`,
+  bio: null,
+  location: null,
+  public_repos: 0,
+  followers: 0,
+  following: 0,
+} as GitHubUser));
+
+const fetchedRepos = await Promise.all(
+  repos.map(async (repo) => {
+    const [owner, name] = repo.split('/');
+    if (!owner || !name) return null;
+    const data = await fetchJson(`https://api.github.com/repos/${owner}/${name}`);
+    if (!data) return null;
+    return {
+      full_name: data.full_name,
+      html_url: data.html_url,
+      description: data.description,
+      stargazers_count: data.stargazers_count,
+      forks_count: data.forks_count,
+      language: data.language,
+      updated_at: data.updated_at,
+    } as GitHubRepo;
+  }),
+);
+
+const githubRepos = fetchedRepos.filter(Boolean) as GitHubRepo[];
+const fallbackRepos = repos.map((repo) => ({
+  full_name: repo,
+  html_url: `https://github.com/${repo}`,
+  description: null,
+  stargazers_count: 0,
+  forks_count: 0,
+  language: null,
+  updated_at: '',
+} as GitHubRepo));
 ---
 
 <Page title="Repositories" description={`GitHub repositories`}>
@@ -29,130 +135,100 @@ const maxLines = reposData.repo_description_lines_max ?? 2;
         site.repositories.githubUsers && users.length > 0 && (
           <>
             <h2 class="section-heading">GitHub users</h2>
-            <div class="repo-grid">
-              {users.map((username) => (
-                <div class="repo-card">
-                  <a
-                    href={`https://github.com/${username}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      class="only-light"
-                      alt={`GitHub stats for ${username}`}
-                      src={`https://github-readme-stats.vercel.app/api/?username=${username}&theme=${site.repositories.themeLight}&show_icons=true`}
-                      loading="lazy"
-                      width="495"
-                      height="195"
-                      onerror="this.closest('.repo-card').classList.add('has-error')"
-                    />
-                    <img
-                      class="only-dark"
-                      alt={`GitHub stats for ${username}`}
-                      src={`https://github-readme-stats.vercel.app/api/?username=${username}&theme=${site.repositories.themeDark}&show_icons=true`}
-                      loading="lazy"
-                      width="495"
-                      height="195"
-                      onerror="this.closest('.repo-card').classList.add('has-error')"
-                    />
-                  </a>
-                  <div class="repo-card-placeholder" aria-hidden="true">
-                    <span>Stats temporarily unavailable</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {site.repositories.trophies && (
-              <>
-                <div class="divider" />
-                {users.map((username) => (
-                  <>
-                    {users.length > 1 && <h4 class="trophy-user">{username}</h4>}
-                    <div class="repo-grid">
-                      <div class="repo-card repo-card--wide">
-                        <a
-                          href={`https://github.com/${username}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <img
-                            class="only-light"
-                            alt={`GitHub achievements for ${username}`}
-                            src={`https://github-profile-trophy.vercel.app/?username=${username}&theme=${site.repositories.trophyThemeLight}`}
-                            loading="lazy"
-                            width="800"
-                            height="190"
-                            onerror="this.closest('.repo-card').classList.add('has-error')"
-                          />
-                          <img
-                            class="only-dark"
-                            alt={`GitHub achievements for ${username}`}
-                            src={`https://github-profile-trophy.vercel.app/?username=${username}&theme=${site.repositories.trophyThemeDark}`}
-                            loading="lazy"
-                            width="800"
-                            height="190"
-                            onerror="this.closest('.repo-card').classList.add('has-error')"
-                          />
-                        </a>
-                        <div class="repo-card-placeholder" aria-hidden="true">
-                          <span>Trophies temporarily unavailable</span>
+            {githubUsers.length > 0 ? (
+              <div class="repo-grid">
+                {githubUsers.map((user) => (
+                  <div class="repo-card repo-card--user">
+                    <a href={user.html_url} target="_blank" rel="noopener noreferrer" class="repo-card-link">
+                      <img src={user.avatar_url} alt={`Avatar of ${user.login}`} loading="lazy" width="120" height="120" />
+                      <div class="repo-card-body">
+                        <h3 class="repo-card-title">{user.name ?? user.login}</h3>
+                        <p class="repo-card-description">{user.bio ?? 'GitHub profile'}</p>
+                        <div class="repo-card-meta">
+                          <span>{user.public_repos} repos</span>
+                          <span>{user.followers} followers</span>
+                          <span>{user.following} following</span>
                         </div>
                       </div>
-                    </div>
-                  </>
+                    </a>
+                  </div>
                 ))}
+              </div>
+            ) : (
+              <>
+                <div class="repo-grid">
+                  {fallbackUsers.map((user) => (
+                    <div class="repo-card repo-card--user">
+                      <a href={user.html_url} target="_blank" rel="noopener noreferrer" class="repo-card-link">
+                        <img src={user.avatar_url} alt={`Avatar of ${user.login}`} loading="lazy" width="120" height="120" />
+                        <div class="repo-card-body">
+                          <h3 class="repo-card-title">{user.login}</h3>
+                          <p class="repo-card-description">GitHub profile</p>
+                          <div class="repo-card-meta">
+                            <span>View profile</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  ))}
+                </div>
+                <p class="repo-warning">
+                  GitHub API data was unavailable at build time. Showing profile links instead.
+                  Add a <code>GITHUB_TOKEN</code> environment variable to enable full metadata.
+                </p>
               </>
             )}
           </>
-        )
-      }
+        )}
 
       {
         site.repositories.githubRepos && repos.length > 0 && (
           <>
             <div class="divider" />
             <h2 class="section-heading">GitHub repositories</h2>
-            <div class="repo-grid">
-              {repos.map((repo) => {
-                const [owner, repoName] = repo.split('/');
-                const showOwner = !users.includes(owner);
-                return (
+            {githubRepos.length > 0 ? (
+              <div class="repo-grid">
+                {githubRepos.map((repo) => (
                   <div class="repo-card">
-                    <a
-                      href={`https://github.com/${repo}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        class="only-light"
-                        alt={`GitHub repository ${repo}`}
-                        src={`https://github-readme-stats.vercel.app/api/pin/?username=${owner}&repo=${repoName}&theme=${site.repositories.themeLight}&show_owner=${showOwner}&description_lines_count=${maxLines}`}
-                        loading="lazy"
-                        width="400"
-                        height="150"
-                        onerror="this.closest('.repo-card').classList.add('has-error')"
-                      />
-                      <img
-                        class="only-dark"
-                        alt={`GitHub repository ${repo}`}
-                        src={`https://github-readme-stats.vercel.app/api/pin/?username=${owner}&repo=${repoName}&theme=${site.repositories.themeDark}&show_owner=${showOwner}&description_lines_count=${maxLines}`}
-                        loading="lazy"
-                        width="400"
-                        height="150"
-                        onerror="this.closest('.repo-card').classList.add('has-error')"
-                      />
+                    <a href={repo.html_url} target="_blank" rel="noopener noreferrer" class="repo-card-link">
+                      <div class="repo-card-body">
+                        <h3 class="repo-card-title">{repo.full_name}</h3>
+                        <p class="repo-card-description">{truncate(repo.description)}</p>
+                        <div class="repo-card-meta">
+                          {repo.language && <span>{repo.language}</span>}
+                          <span>★ {repo.stargazers_count}</span>
+                          <span>🍴 {repo.forks_count}</span>
+                        </div>
+                      </div>
                     </a>
-                    <div class="repo-card-placeholder" aria-hidden="true">
-                      <span>Repository card temporarily unavailable</span>
-                    </div>
                   </div>
-                );
-              })}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <>
+                <div class="repo-grid">
+                  {fallbackRepos.map((repo) => (
+                    <div class="repo-card">
+                      <a href={repo.html_url} target="_blank" rel="noopener noreferrer" class="repo-card-link">
+                        <div class="repo-card-body">
+                          <h3 class="repo-card-title">{repo.full_name}</h3>
+                          <p class="repo-card-description">Repository link</p>
+                          <div class="repo-card-meta">
+                            <span>View on GitHub</span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  ))}
+                </div>
+                <p class="repo-warning">
+                  GitHub API data was unavailable at build time. Showing repository links instead.
+                  Add a <code>GITHUB_TOKEN</code> environment variable to enable full metadata.
+                </p>
+              </>
+            )}
           </>
-        )
-      }
+        )}
     </article>
   </div>
 </Page>
@@ -184,54 +260,71 @@ const maxLines = reposData.repo_description_lines_max ?? 2;
     border-top: 1px solid var(--global-divider-color);
     margin: 2rem 0;
   }
-  .trophy-user {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--global-text-color-light);
-    margin-bottom: 0.5rem;
-    font-family: var(--font-sans);
-  }
   .repo-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1rem;
     margin-bottom: 1rem;
   }
   .repo-card {
-    position: relative;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 12px;
+    background: var(--global-card-bg-color);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .repo-card--wide {
-    grid-column: 1 / -1;
+  .repo-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.05);
   }
-  .repo-card a {
-    display: block;
-    text-decoration: none;
+  .repo-card--user {
+    display: flex;
+    flex-direction: column;
   }
   .repo-card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 6px;
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    object-fit: cover;
   }
-  /* Error fallback: hide the link, show the placeholder */
-  .repo-card:not(.has-error) .repo-card-placeholder {
-    display: none;
+  .repo-card-body {
+    padding: 1rem;
   }
-  .repo-card.has-error a {
-    display: none;
+  .repo-card-title {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--global-text-color);
   }
-  .repo-card-placeholder {
+  .repo-card-description {
+    margin: 0.5rem 0 1rem;
+    color: var(--global-text-color-light);
+    line-height: 1.5;
+    min-height: 3em;
+  }
+  .repo-card-meta {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px dashed var(--global-divider-color, #ccc);
-    border-radius: 8px;
-    color: var(--global-text-color-light, #666);
-    font-size: 0.875rem;
-    min-height: 150px;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--global-text-color-light);
   }
-  /* Dark mode visibility helpers */
-  [data-theme='light'] .only-dark,
-  [data-theme='dark'] .only-light {
-    display: none;
+  .repo-card-meta span {
+    background: var(--global-card-bg-color);
+    padding: 0.35rem 0.65rem;
+    border-radius: 999px;
+  }
+  .repo-warning {
+    color: var(--global-text-color-light);
+    background: var(--global-card-bg-color);
+    border: 1px solid var(--global-divider-color);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+  .repo-warning code {
+    font-family: var(--font-mono, monospace);
+    background: var(--global-card-bg-color);
+    padding: 0.1em 0.25em;
+    border-radius: 4px;
   }
 </style>

@@ -1,164 +1,217 @@
 {
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
-    "name": "Albert Einstein",
-    "label": "Theoretical Physicist",
-    "email": "einstein@example.com",
-    "phone": "",
-    "url": "https://example.github.io",
-    "summary": "Theoretical physicist who developed the theory of relativity. Nobel Prize Laureate in Physics (1921). Known for mass-energy equivalence E = mc².",
+    "name": "Teo Schnell",
+    "label": "Aerospace Engineering Student",
+    "email": "schnellteo@gmail.com",
+    "phone": "+1 (831) 226-9397",
+    "url": "https://teoschnell.com",
+    "summary": "Aerospace engineering student with experience in UAV design, systems integration, manufacturing, material testing, and STEM tutoring.",
     "location": {
-      "address": "Einstein Drive",
-      "postalCode": "08540",
-      "city": "Princeton",
+      "address": "Santa Cruz",
+      "postalCode": "",
+      "city": "Santa Cruz",
       "countryCode": "US",
-      "region": "New Jersey"
+      "region": "California"
     },
     "profiles": [
       {
+        "network": "LinkedIn",
+        "username": "teo-schnell-414376247",
+        "url": "https://www.linkedin.com/in/teo-schnell-414376247/"
+      },
+      {
         "network": "GitHub",
-        "username": "example",
-        "url": "https://github.com/example"
+        "username": "taschnell",
+        "url": "https://github.com/taschnell"
       }
     ]
   },
   "education": [
     {
-      "institution": "University of Zurich",
-      "url": "https://www.uzh.ch",
-      "area": "Physics",
-      "studyType": "PhD",
-      "startDate": "1900-01-01",
-      "endDate": "1905-01-01",
-      "courses": []
+      "institution": "San Jose State University",
+      "url": "https://www.sjsu.edu",
+      "area": "Aerospace Engineering",
+      "studyType": "Bachelor of Science",
+      "startDate": "2026-09",
+      "endDate": "2028-05"
     },
     {
-      "institution": "ETH Zurich",
-      "url": "https://ethz.ch",
-      "area": "Mathematics and Physics",
-      "studyType": "Teaching Diploma",
-      "startDate": "1896-01-01",
-      "endDate": "1900-01-01",
-      "courses": []
+      "institution": "Cabrillo College",
+      "url": "https://www.cabrillo.edu",
+      "area": "Engineering",
+      "studyType": "Associate of Science",
+      "endDate": "2026-05"
+    },
+    {
+      "institution": "Cabrillo College",
+      "url": "https://www.cabrillo.edu",
+      "area": "Computer Science",
+      "studyType": "Associate of Science",
+      "endDate": "2025-05"
     }
   ],
   "work": [
     {
-      "name": "Institute for Advanced Study",
-      "position": "Professor",
-      "url": "https://www.ias.edu",
-      "startDate": "1933-01-01",
-      "endDate": "",
-      "summary": "Conducted research on unified field theory and contributed to foundational debates in quantum mechanics.",
+      "name": "Cabrillo College Robotics",
+      "position": "UAV Platform Lead",
+      "url": "https://www.cabrillo.edu",
+      "startDate": "2025-08",
+      "endDate": "Present",
+      "summary": "Led UAV airframe design, simulation, and system integration for the college robotics team.",
       "highlights": [
-        "Developed unified field theory research program",
-        "Mentored physicists and mathematicians",
-        "Contributed to quantum mechanics foundations debate"
+        "Led development of a UAV platform including airframe design, simulation, and system integration",
+        "Designed and tested UAV airframes using SolidWorks Flow Simulation and flight testing",
+        "Simulated UAV designs and sensors using Gazebo Simulator and ROS2"
       ]
     },
     {
-      "name": "University of Berlin",
-      "position": "Professor and Director, Kaiser Wilhelm Institute",
-      "startDate": "1914-01-01",
-      "endDate": "1933-01-01",
-      "summary": "Developed general theory of relativity. Awarded Nobel Prize in Physics 1921.",
+      "name": "3D-Printed UAV Project",
+      "position": "Project Lead",
+      "startDate": "2025-02",
+      "endDate": "2025-08",
+      "summary": "Developed a custom flight stabilization system for a 3D-printed UAV.",
       "highlights": [
-        "Completed general theory of relativity (1915)",
-        "Predicted gravitational waves and black holes",
-        "Nobel Prize in Physics, 1921"
+        "Developed and tested a custom STM32-based flight controller with integrated sensors",
+        "Implemented PID-driven stabilization algorithms for flight control",
+        "Built and validated a 3D-printed UAV airframe"
       ]
     },
     {
-      "name": "Swiss Patent Office",
-      "position": "Technical Expert",
-      "startDate": "1902-01-01",
-      "endDate": "1909-01-01",
-      "summary": "Evaluated patent applications while producing four landmark physics papers in 1905.",
+      "name": "Thermodynamics Gas Simulation",
+      "position": "Simulation Developer",
+      "startDate": "2025-05",
+      "endDate": "2025-05",
+      "summary": "Created a particle-based gas simulation to model temperature effects.",
       "highlights": [
-        "Published special relativity paper (1905)",
-        "Published photoelectric effect paper, later basis of 1921 Nobel Prize",
-        "Published Brownian motion paper",
-        "Derived E = mc²"
+        "Created a particle-based simulation modeling gas behavior and temperature effects",
+        "Visualized simulation results using Matplotlib"
+      ]
+    },
+    {
+      "name": "RC Plane Physics Model",
+      "position": "Model Developer",
+      "startDate": "2024-05",
+      "endDate": "2024-05",
+      "summary": "Built a physics model to predict RC aircraft performance with high accuracy.",
+      "highlights": [
+        "Built a Python model predicting thrust, drag, and lift for RC aircraft",
+        "Achieved model accuracy within 3% error compared to real-world data"
+      ]
+    },
+    {
+      "name": "University of California Santa Cruz",
+      "position": "Materials Science REU Participant",
+      "url": "https://www.ucsc.edu",
+      "startDate": "2026-06",
+      "endDate": "2026-08",
+      "summary": "Selected for an NSF-funded Research Experience for Undergraduates program.",
+      "highlights": [
+        "Selected for the UC Santa Cruz Materials Science REU program for summer 2026"
+      ]
+    },
+    {
+      "name": "Cabrillo College Physics Learning Center",
+      "position": "Physics Learning Center Tutor",
+      "url": "https://www.cabrillo.edu",
+      "startDate": "2025-02",
+      "endDate": "Present",
+      "summary": "Tutored students in physics and engineering concepts.",
+      "highlights": [
+        "Assisted students in mastering complex physics and engineering concepts",
+        "Tutored mechanics, circuits, and thermodynamics coursework"
+      ]
+    },
+    {
+      "name": "Cabrillo College",
+      "position": "Computer Science and STEM Tutor",
+      "url": "https://www.cabrillo.edu",
+      "startDate": "2023-02",
+      "endDate": "2025-05",
+      "summary": "Tutored students in computer science and STEM coursework.",
+      "highlights": [
+        "Tutored students in C++, Python, MATLAB, RISC-V, and mathematics",
+        "Became the youngest CS tutor in Cabrillo College history at age 16"
+      ]
+    },
+    {
+      "name": "Cabrillo Robotics Foundation",
+      "position": "Co-Founder & President",
+      "startDate": "2025-01",
+      "endDate": "Present",
+      "summary": "Co-founded and led a nonprofit robotics foundation.",
+      "highlights": [
+        "Co-founded and served as president of Cabrillo Robotics Foundation",
+        "Led strategy, outreach, and nonprofit operations"
+      ]
+    },
+    {
+      "name": "Cabrillo Robotics Club",
+      "position": "President",
+      "startDate": "2024-01",
+      "endDate": "Present",
+      "summary": "Served as president of the Cabrillo Robotics Club.",
+      "highlights": [
+        "Led club meetings, projects, and student engagement"
       ]
     }
   ],
   "awards": [
     {
-      "title": "Nobel Prize in Physics",
-      "date": "1921-11-09",
-      "awarder": "Royal Swedish Academy of Sciences",
-      "summary": "For services to theoretical physics, and especially for his discovery of the law of the photoelectric effect."
+      "title": "GPA 3.60",
+      "date": "2025-05",
+      "awarder": "Cabrillo College"
     },
     {
-      "title": "Copley Medal",
-      "date": "1925-11-30",
-      "awarder": "Royal Society"
+      "title": "CSWA: SolidWorks Certification",
+      "date": "2025",
+      "awarder": "SolidWorks"
     },
     {
-      "title": "Max Planck Medal",
-      "date": "1929-01-01",
-      "awarder": "German Physical Society"
+      "title": "FAA Part 107 Certification",
+      "date": "2026",
+      "awarder": "Federal Aviation Administration",
+      "summary": "In progress"
+    },
+    {
+      "title": "Goethe Institute A2 German Language",
+      "date": "2025",
+      "awarder": "Goethe Institute"
     }
   ],
-  "publications": [
-    {
-      "name": "On the Electrodynamics of Moving Bodies",
-      "publisher": "Annalen der Physik",
-      "releaseDate": "1905-06-30",
-      "url": "https://doi.org/10.1002/andp.19053221004",
-      "summary": "The special theory of relativity."
-    },
-    {
-      "name": "Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?",
-      "publisher": "Physical Review",
-      "releaseDate": "1935-05-15",
-      "url": "https://doi.org/10.1103/PhysRev.47.777",
-      "summary": "The EPR paradox paper, co-authored with Podolsky and Rosen."
-    }
-  ],
+  "publications": [],
   "skills": [
     {
-      "name": "Theoretical Physics",
-      "level": "Master",
-      "keywords": [
-        "General Relativity",
-        "Special Relativity",
-        "Quantum Mechanics",
-        "Statistical Mechanics"
-      ]
+      "name": "Engineering Software",
+      "keywords": ["SolidWorks", "Fusion360", "AutoCAD"]
     },
     {
-      "name": "Mathematics",
-      "keywords": ["Differential Geometry", "Tensor Calculus", "Riemannian Geometry"]
+      "name": "Manufacturing",
+      "keywords": ["Manual machining", "CNC machining", "3D printing", "Precision foam fabrication"]
+    },
+    {
+      "name": "Material Testing",
+      "keywords": ["Tensile testing", "Compression testing", "Hardness testing", "Impact testing", "Data analysis", "Lab reporting"]
+    },
+    {
+      "name": "Programming",
+      "keywords": ["C++", "Embedded C", "Python", "ROS2", "RISC-V", "Excel", "MATLAB", "ArduPilot"]
     }
   ],
   "languages": [
-    {
-      "language": "German",
-      "fluency": "Native speaker"
-    },
     {
       "language": "English",
       "fluency": "Fluent"
     },
     {
-      "language": "French",
-      "fluency": "Proficient"
+      "language": "German",
+      "fluency": "Intermediate"
     }
   ],
-  "interests": [
-    {
-      "name": "Music",
-      "keywords": ["Violin", "Mozart", "Bach"]
-    },
-    {
-      "name": "Philosophy",
-      "keywords": ["Spinoza", "Mach", "Kant"]
-    }
-  ],
+  "interests": [],
   "meta": {
     "canonical": "https://raw.githubusercontent.com/jsonresume/resume-schema/master/schema.json",
     "version": "v1.0.0",
-    "lastModified": "2024-01-01T00:00:00Z"
+    "lastModified": "2026-05-28T00:00:00Z"
   }
 }
