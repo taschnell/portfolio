@@ -5,6 +5,8 @@ importance: 15
 category: Current projects
 ---
 
+Page To Be Completed
+
 Designed and built a CNC foam cutter for Cabrillo Robotics, enabling rapid fabrication of wing cores and aerodynamic structures for RC aircraft.
 
 - Built the cutter mechanics, motion control, and foam cutting toolchain.

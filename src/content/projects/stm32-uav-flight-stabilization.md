@@ -6,6 +6,8 @@ importance: 20
 category: Past projects
 ---
 
+Page To Be Completed
+
 Developed and tested a custom STM32-based flight controller for a 3D-printed UAV, incorporating sensor fusion and PID-stabilization algorithms.
 
 - Designed a microcontroller-based flight stabilizer using integrated IMU sensors.
