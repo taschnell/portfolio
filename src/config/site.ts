@@ -99,7 +99,7 @@ export const site = {
     bluesky_handle: undefined as string | undefined,
     medium_username: undefined as string | undefined,
     /** Path to CV PDF in public/assets/pdf/ */
-    cv_pdf: undefined as string | undefined,
+    cv_pdf: '/assets/pdf/Teo Schnell Engineering Resume May 29, 26.pdf' as string | undefined,
     /** Show RSS icon in social links */
     rss_icon: false,
   },
@@ -399,7 +399,7 @@ export const site = {
     projects: {
       /** Description shown below the "projects" heading on the projects page. */
       description:
-        'A curated portfolio of aerospace, controls, and robotics work including UCSC NSF REU research and Cabrillo Robotics systems.',
+        'A curated portfolio of aerospace, research, and robotics work.',
     },
     teaching: {
       /** Description shown below the "teaching" heading on the teaching page. */

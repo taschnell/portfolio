@@ -3,10 +3,8 @@ github_users:
 
 github_repos:
   - taschnell/portfolio
-  - taschnell/as-folio
   - taschnell/RcPlaneSim
   - taschnell/piplane
   - taschnell/piplane-sim
-  - taschnell/OpenVTx
 
 repo_description_lines_max: 2

@@ -2,7 +2,7 @@
 title: RC Aircraft Aerodynamic Modeling and Experimental Validation
 description: Developed a Python model of RC aircraft aerodynamics to describe real world data.
 github: taschnell/RcPlaneSim
-importance: 40
+importance: 1
 category: Past projects
 ---
 
