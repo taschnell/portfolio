@@ -398,8 +398,7 @@ export const site = {
   pages: {
     projects: {
       /** Description shown below the "projects" heading on the projects page. */
-      description:
-        'A curated portfolio of aerospace, research, and robotics work.',
+      description: 'A curated portfolio of aerospace, research, and robotics work.',
     },
     teaching: {
       /** Description shown below the "teaching" heading on the teaching page. */
