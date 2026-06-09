@@ -1,0 +1,256 @@
+---
+import CVEntry from '@components/cv/CVEntry.astro';
+import CVSection from '@components/cv/CVSection.astro';
+import { site } from '@config/site';
+import Page from '@layouts/Page.astro';
+import type { JSONResume } from '@utils/cv';
+import { formatCVDate, formatDateRange } from '@utils/cv';
+
+import resumeData from '../data/resume.json';
+
+const jr = resumeData as JSONResume;
+const jrLabel = jr?.basics?.label ?? '';
+
+const tocItems = [
+  { label: 'Contact Information', href: '#contact' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Education', href: '#education' },
+  { label: 'Publications', href: '#publications' },
+  { label: 'Awards', href: '#awards' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Languages', href: '#languages' },
+  { label: 'Interests', href: '#interests' },
+].filter((item) => {
+  if (item.href === '#contact') return Boolean(jr?.basics);
+  if (item.href === '#experience') return Boolean(jr?.work?.length);
+  if (item.href === '#education') return Boolean(jr?.education?.length);
+  if (item.href === '#publications') return Boolean(jr?.publications?.length);
+  if (item.href === '#awards') return Boolean(jr?.awards?.length);
+  if (item.href === '#skills') return Boolean(jr?.skills?.length);
+  if (item.href === '#languages') return Boolean(jr?.languages?.length);
+  if (item.href === '#interests') return Boolean(jr?.interests?.length);
+  return true;
+});
+---
+
+<Page title="Old CV" description={`Legacy text CV of ${site.author.name}`}>
+  <div class="post">
+    <header class="post-header">
+      <h1 class="post-title">Old CV</h1>
+      <p class="post-subtitle">This is the legacy text-based CV page kept for reference. The main resume page is the PDF reader at /cv/.</p>
+    </header>
+
+    <article>
+      <div class="cv-page-wrapper">
+        {tocItems.length > 0 && (
+          <nav class="cv-sidebar-toc" aria-label="Legacy CV sections">
+            <ul>
+              {tocItems.map((item) => (
+                <li>
+                  <a href={item.href}>{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+
+        <div class="cv">
+          {jr?.basics && (
+            <>
+              <a class="anchor" id="contact"></a>
+              <div class="card mt-3 p-3">
+                <h3 class="card-title font-weight-medium">Contact Information</h3>
+                <table class="table table-cv table-sm table-borderless">
+                  {jr.basics.name && (
+                    <tr>
+                      <td class="p-1 pr-2 font-weight-bold"><b>Name</b></td>
+                      <td class="p-1 pl-2 font-weight-light">{jr.basics.name}</td>
+                    </tr>
+                  )}
+                  {jrLabel && (
+                    <tr>
+                      <td class="p-1 pr-2 font-weight-bold"><b>Professional Title</b></td>
+                      <td class="p-1 pl-2 font-weight-light">{jrLabel}</td>
+                    </tr>
+                  )}
+                  {jr.basics.email && (
+                    <tr>
+                      <td class="p-1 pr-2 font-weight-bold"><b>Email</b></td>
+                      <td class="p-1 pl-2 font-weight-light">{jr.basics.email}</td>
+                    </tr>
+                  )}
+                  {jr.basics.phone && (
+                    <tr>
+                      <td class="p-1 pr-2 font-weight-bold"><b>Phone</b></td>
+                      <td class="p-1 pl-2 font-weight-light">{jr.basics.phone}</td>
+                    </tr>
+                  )}
+                  {jr.basics.url && (
+                    <tr>
+                      <td class="p-1 pr-2 font-weight-bold"><b>Website</b></td>
+                      <td class="p-1 pl-2 font-weight-light">
+                        <a href={jr.basics.url} target="_blank" rel="noopener noreferrer">{jr.basics.url}</a>
+                      </td>
+                    </tr>
+                  )}
+                </table>
+              </div>
+            </>
+          )}
+
+          {jr?.work && jr.work.length > 0 && (
+            <CVSection title="Experience" id="experience">
+              <ul class="card-text font-weight-light list-group list-group-flush">
+                {jr.work.map((e) => (
+                  <CVEntry
+                    title={e.position ?? ''}
+                    subtitle={e.name}
+                    url={e.url}
+                    dates={formatDateRange(e.startDate, e.endDate)}
+                    highlights={e.highlights}
+                  />
+                ))}
+              </ul>
+            </CVSection>
+          )}
+
+          {jr?.education && jr.education.length > 0 && (
+            <CVSection title="Education" id="education">
+              <ul class="card-text font-weight-light list-group list-group-flush">
+                {jr.education.map((e) => (
+                  <CVEntry
+                    title={[e.studyType, e.area].filter(Boolean).join(' in ')}
+                    subtitle={e.institution}
+                    url={e.url}
+                    dates={formatDateRange(e.startDate, e.endDate)}
+                    highlights={e.courses}
+                  />
+                ))}
+              </ul>
+            </CVSection>
+          )}
+
+          {jr?.publications && jr.publications.length > 0 && (
+            <CVSection title="Selected Publications" id="publications">
+              <ul class="card-text font-weight-light list-group list-group-flush">
+                {jr.publications.map((e) => (
+                  <CVEntry
+                    title={e.name ?? ''}
+                    subtitle={e.publisher}
+                    url={e.url}
+                    dates={formatCVDate(e.releaseDate)}
+                    highlights={e.summary ? [e.summary] : []}
+                  />
+                ))}
+              </ul>
+            </CVSection>
+          )}
+
+          {jr?.awards && jr.awards.length > 0 && (
+            <CVSection title="Honors &amp; Awards" id="awards">
+              <ul class="card-text font-weight-light list-group list-group-flush">
+                {jr.awards.map((e) => (
+                  <CVEntry
+                    title={e.title ?? ''}
+                    subtitle={e.awarder}
+                    dates={formatCVDate(e.date)}
+                    highlights={e.summary ? [e.summary] : []}
+                  />
+                ))}
+              </ul>
+            </CVSection>
+          )}
+
+          {jr?.skills && jr.skills.length > 0 && (
+            <CVSection title="Skills" id="skills">
+              <div class="card-text font-weight-light">
+                {jr.skills.map((e) => (
+                  <div class="skill-item">
+                    <strong>{e.name}:</strong>{' '}{e.keywords?.join(', ')}
+                  </div>
+                ))}
+              </div>
+            </CVSection>
+          )}
+
+          {jr?.languages && jr.languages.length > 0 && (
+            <CVSection title="Languages" id="languages">
+              <div class="card-text font-weight-light">
+                {jr.languages.map((e) => (
+                  <div class="skill-item">
+                    <strong>{e.language}:</strong>{' '}{e.fluency}
+                  </div>
+                ))}
+              </div>
+            </CVSection>
+          )}
+
+          {jr?.interests && jr.interests.length > 0 && (
+            <CVSection title="Interests" id="interests">
+              <div class="card-text font-weight-light">
+                {jr.interests.map((e) => (
+                  <div class="skill-item">
+                    <strong>{e.name}:</strong>{' '}{e.keywords?.join(', ')}
+                  </div>
+                ))}
+              </div>
+            </CVSection>
+          )}
+        </div>
+      </div>
+    </article>
+  </div>
+</Page>
+
+<style>
+  .cv-page-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .cv-sidebar-toc {
+    flex-shrink: 0;
+    width: 180px;
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+
+  .cv-sidebar-toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-left: 2px solid var(--global-divider-color);
+  }
+
+  .cv-sidebar-toc li a {
+    display: block;
+    padding: 0.3rem 0 0.3rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--global-text-color-light);
+    text-decoration: none;
+    transition: color 0.15s ease;
+    line-height: 1.3;
+  }
+
+  .cv-sidebar-toc li a:hover {
+    color: var(--global-theme-color);
+  }
+
+  .cv {
+    flex: 1;
+    min-width: 0;
+  }
+
+  @media (max-width: 768px) {
+    .cv-page-wrapper {
+      flex-direction: column;
+    }
+
+    .cv-sidebar-toc {
+      display: none;
+    }
+  }
+</style>

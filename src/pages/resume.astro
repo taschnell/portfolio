@@ -1,0 +1,127 @@
+---
+import { site } from '@config/site';
+import Page from '@layouts/Page.astro';
+import { withBase } from '@utils/base';
+import { Icon } from 'astro-icon/components';
+
+const pdfUrl = withBase(
+  site.cv.pdfPath ??
+    site.socials.cv_pdf ??
+    '/assets/pdf/Teo Schnell Engineering Resume May 29, 26.pdf',
+);
+const linkedinUrl = site.socials.linkedin_username
+  ? `https://www.linkedin.com/in/${site.socials.linkedin_username}`
+  : 'https://www.linkedin.com/';
+---
+
+<Page title="Resume" description={`Resume of ${site.author.name}`}>
+  <div class="post">
+    <header class="post-header">
+      <h1 class="post-title">Resume</h1>
+      <div class="cv-actions">
+        <a href={pdfUrl} target="_blank" rel="noopener noreferrer" class="cv-action-btn">
+          <Icon name="fa-solid:file-pdf" /> Open PDF
+        </a>
+        {
+          site.socials.linkedin_username && (
+            <a
+              href={linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cv-action-btn cv-action-btn--secondary"
+            >
+              <Icon name="fa-brands:linkedin" /> View LinkedIn
+            </a>
+          )
+        }
+      </div>
+    </header>
+
+    <article>
+      <div class="cv-page-wrapper">
+        <div class="cv">
+          <section class="card resume-viewer-card mt-3 p-3">
+            <div class="resume-viewer-frame-wrap">
+              <iframe
+                src={pdfUrl}
+                title="Resume PDF viewer"
+                class="resume-viewer-frame"
+                loading="lazy"></iframe>
+            </div>
+          </section>
+        </div>
+      </div>
+    </article>
+  </div>
+</Page>
+
+<style>
+  .cv-page-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .cv {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .cv-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .cv-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    background: var(--global-theme-color);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .cv-action-btn:hover {
+    color: white;
+    opacity: 0.92;
+  }
+
+  .cv-action-btn--secondary {
+    background: var(--global-divider-color);
+    color: var(--global-text-color);
+  }
+
+  .cv-action-btn--secondary:hover {
+    color: var(--global-text-color);
+  }
+
+  .resume-viewer-card {
+    margin-bottom: 1rem;
+  }
+
+  .resume-viewer-frame-wrap {
+    border: 1px solid var(--global-divider-color);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .resume-viewer-frame {
+    width: 100%;
+    min-height: 88vh;
+    border: 0;
+    background: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .cv-page-wrapper {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -27,7 +27,8 @@ export const site = {
   title: 'Teo Schnell',
 
   /** Site description. Used in meta tags. */
-  description: 'Personal portfolio, projects, and CV for aerospace engineer Teo Schnell.',
+  description:
+    'Personal portfolio, projects, and CV for aerospace engineering student Teo Schnell.',
 
   /**
    * Full URL of your deployed site (no trailing slash).
@@ -62,13 +63,13 @@ export const site = {
      * Subtitle below your name on the about page.
      * HTML is supported.
      */
-    subtitle: `Aerospace Engineer`,
+    subtitle: `Aerospace Engineering Student · <a href="https://www.sjsu.edu/ae/" target="_blank" rel="noopener noreferrer"> San José  State University</a>`,
 
     /**
      * Address block below profile photo.
      * HTML is supported.
      */
-    moreInfo: `<p>Personal portfolio and CV for aerospace engineering work.</p>
+    moreInfo: `<p>Personal portfolio and resume for aerospace engineering work.</p>
       <p>Contact via email or LinkedIn.</p>`,
   },
 
@@ -121,7 +122,7 @@ export const site = {
     items: [
       { label: 'About', href: '/' },
       { label: 'Projects', href: '/projects/' },
-      { label: 'CV', href: '/cv/' },
+      { label: 'Resume', href: '/resume/' },
     ] as NavItem[],
   },
 
@@ -156,7 +157,7 @@ export const site = {
      */
     format: 'jsonresume' as 'rendercv' | 'jsonresume',
     /** Path to CV PDF for the download button in public/assets/pdf/. */
-    pdfPath: undefined as string | undefined,
+    pdfPath: '/assets/pdf/Teo Schnell Engineering Resume May 29, 26.pdf' as string | undefined,
   },
 
   // ─── Blog ──────────────────────────────────────────────────────────────────
