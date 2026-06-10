@@ -133,7 +133,7 @@ export const site = {
      * Text shown in footer. HTML is supported.
      * Leave empty string to hide.
      */
-    text: `Personal portfolio of Teo Schnell.`,
+    text: `Portfolio of Teo Schnell.`,
     /** Show "Last updated" timestamp in footer. */
     lastUpdated: false,
     /** Path to impressum/legal page (EU GDPR). Leave undefined to hide. */
